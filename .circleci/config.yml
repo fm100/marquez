@@ -285,18 +285,18 @@ jobs:
 workflows:
   marquez:
     jobs:
-      - build-api
-      - test-web
-      - build-client-java
-      - build-integration-spark
-      - test-client-python
-      - test-integration-common
-      - test-integration-airflow
-      - test-integration-dbt-bigquery
-      - test-integration-dbt-snowflake
-      - integration-test-airflow:
-          requires:
-            - test-integration-airflow
+#      - build-api
+#      - test-web
+#      - build-client-java
+#      - build-integration-spark
+#      - test-client-python
+#      - test-integration-common
+#      - test-integration-airflow
+#      - test-integration-dbt-bigquery
+#      - test-integration-dbt-snowflake
+      - integration-test-airflow
+#          requires:
+#            - test-integration-airflow
   release:
     jobs:
       - build-integration-common:

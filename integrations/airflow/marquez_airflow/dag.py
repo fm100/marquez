@@ -99,6 +99,11 @@ class DAG(airflow.models.DAG, LoggingMixin):
     def create_dagrun(self, *args, **kwargs):
         # run Airflow's create_dagrun() first
         dagrun = super(DAG, self).create_dagrun(*args, **kwargs)
+        self.log.info('CREATE_DAGRUN')
+
+        import traceback
+        for line in traceback.format_stack():
+            self.log.info(line.strip())
 
         create_dag_start_ms = self._now_ms()
         try:
@@ -155,7 +160,12 @@ class DAG(airflow.models.DAG, LoggingMixin):
                     exc_info=True)
 
     def handle_callback(self, *args, **kwargs):
-        self.log.debug(f"handle_callback({args}, {kwargs})")
+        self.log.info(f"handle_callback({args}, {kwargs})")
+
+        import traceback
+        for line in traceback.format_stack():
+            self.log.info(line.strip())
+
         try:
             dagrun = args[0]
             self.log.debug(f"handle_callback() dagrun : {dagrun}")
